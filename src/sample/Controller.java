@@ -12,7 +12,6 @@ public class Controller {
     }
 
     public TableView getTableAllPublication() {
-        Controller controller = new Controller();
 
         TableView table = new TableView<AllPublication>();
 
@@ -34,6 +33,61 @@ public class Controller {
 
         table.getColumns().addAll(indexOfPublicationCol, nameOfPublicationCol,
                 periodOfPublicationCol, costOfSubscriptionCol);
+
+        return table;
+    }
+
+    public TableView getTableCurrentSubscriptions() {
+
+        TableView table = new TableView<CurrentSubscriptions>();
+
+        TableColumn FIOCol
+                = new TableColumn<AllPublication, Integer>("FIO");
+        TableColumn postCol
+                = new TableColumn<AllPublication, String>("post");
+        TableColumn nameOfPublicationCol
+                = new TableColumn<AllPublication, String>("nameOfPublication");
+        TableColumn periodOfSubscriptionCol
+                = new TableColumn<AllPublication, String>("periodOfSubscription");
+
+        FIOCol.setCellValueFactory(new PropertyValueFactory<>("FIO"));
+        postCol.setCellValueFactory(new PropertyValueFactory<>("post"));
+        nameOfPublicationCol.setCellValueFactory(new PropertyValueFactory<>("nameOfPublication"));
+        periodOfSubscriptionCol.setCellValueFactory(new PropertyValueFactory<>("periodOfSubscription"));
+
+        table.setItems(getAllPublication());
+
+        table.getColumns().addAll(FIOCol, nameOfPublicationCol,
+                nameOfPublicationCol, periodOfSubscriptionCol);
+
+        return table;
+    }
+
+    public TableView getTableDeliveryHistory() {
+
+        TableView table = new TableView<DeliveryHistory>();
+
+        TableColumn FIOCol
+                = new TableColumn<AllPublication, Integer>("FIO");
+        TableColumn nameOfPublicationCol
+                = new TableColumn<AllPublication, String>("nameOfPublication");
+        TableColumn estimatedDeliveryDateCol
+                = new TableColumn<AllPublication, String>("estimatedDeliveryDate");
+        TableColumn statusOfDeliveryCol
+                = new TableColumn<AllPublication, String>("statusOfDelivery");
+        TableColumn typeOfDeliveryCol
+                = new TableColumn<AllPublication, String>("typeOfDelivery");
+
+        FIOCol.setCellValueFactory(new PropertyValueFactory<>("FIO"));
+        nameOfPublicationCol.setCellValueFactory(new PropertyValueFactory<>("nameOfPublication"));
+        estimatedDeliveryDateCol.setCellValueFactory(new PropertyValueFactory<>("estimatedDeliveryDate"));
+        statusOfDeliveryCol.setCellValueFactory(new PropertyValueFactory<>("statusOfDelivery"));
+        typeOfDeliveryCol.setCellValueFactory(new PropertyValueFactory<>("typeOfDelivery"));
+
+        table.setItems(getAllPublication());
+
+        table.getColumns().addAll(FIOCol, nameOfPublicationCol,
+                estimatedDeliveryDateCol, statusOfDeliveryCol, typeOfDeliveryCol);
 
         return table;
     }
