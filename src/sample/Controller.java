@@ -11,6 +11,14 @@ public class Controller {
         return null;
     }
 
+    public ObservableList<CurrentSubscriptions> getCurrentSubscriptions() {
+        return null;
+    }
+
+    public ObservableList<DeliveryHistory> getDeliveryHistory() {
+        return null;
+    }
+
     public TableView getTableAllPublication() {
 
         TableView table = new TableView<AllPublication>();
@@ -42,7 +50,7 @@ public class Controller {
         TableView table = new TableView<CurrentSubscriptions>();
 
         TableColumn FIOCol
-                = new TableColumn<AllPublication, Integer>("FIO");
+                = new TableColumn<AllPublication, String>("FIO");
         TableColumn postCol
                 = new TableColumn<AllPublication, String>("post");
         TableColumn nameOfPublicationCol
@@ -55,7 +63,7 @@ public class Controller {
         nameOfPublicationCol.setCellValueFactory(new PropertyValueFactory<>("nameOfPublication"));
         periodOfSubscriptionCol.setCellValueFactory(new PropertyValueFactory<>("periodOfSubscription"));
 
-        table.setItems(getAllPublication());
+        table.setItems(getCurrentSubscriptions());
 
         table.getColumns().addAll(FIOCol, nameOfPublicationCol,
                 nameOfPublicationCol, periodOfSubscriptionCol);
@@ -74,7 +82,7 @@ public class Controller {
         TableColumn estimatedDeliveryDateCol
                 = new TableColumn<AllPublication, String>("estimatedDeliveryDate");
         TableColumn statusOfDeliveryCol
-                = new TableColumn<AllPublication, String>("statusOfDelivery");
+                = new TableColumn<AllPublication, Boolean>("statusOfDelivery");
         TableColumn typeOfDeliveryCol
                 = new TableColumn<AllPublication, String>("typeOfDelivery");
 
@@ -84,7 +92,7 @@ public class Controller {
         statusOfDeliveryCol.setCellValueFactory(new PropertyValueFactory<>("statusOfDelivery"));
         typeOfDeliveryCol.setCellValueFactory(new PropertyValueFactory<>("typeOfDelivery"));
 
-        table.setItems(getAllPublication());
+        table.setItems(getDeliveryHistory());
 
         table.getColumns().addAll(FIOCol, nameOfPublicationCol,
                 estimatedDeliveryDateCol, statusOfDeliveryCol, typeOfDeliveryCol);
