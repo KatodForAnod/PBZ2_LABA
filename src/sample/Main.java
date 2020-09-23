@@ -13,8 +13,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
-
-
 public class Main extends Application {
 
     @Override
@@ -22,41 +20,13 @@ public class Main extends Application {
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
 
         HBox mainHBox = new HBox();
-        TableView table = createTableAboutWarehouses();
+        TableView table = new TableView();
         VBox mainVBox = new VBox(mainHBox, table);
 
 
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(mainVBox, 500, 500));
         primaryStage.show();
-    }
-
-    public TableView createTableAboutWarehouses() {
-        Controller controller = new Controller();
-
-        TableView table = new TableView<TableInformationAboutWarehouses>();
-
-        TableColumn numberCol
-                = new TableColumn<TableInformationAboutWarehouses, Integer>("Number");
-
-        TableColumn nameCol
-                = new TableColumn<TableInformationAboutWarehouses, String>("Name");
-
-        TableColumn telephoneNumberCol
-                = new TableColumn<TableInformationAboutWarehouses, String>("Telephone number");
-
-        numberCol.setCellValueFactory(new PropertyValueFactory<>("number"));
-        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        telephoneNumberCol.setCellValueFactory(new PropertyValueFactory<>("telephoneNumber"));
-
-        ObservableList<TableInformationAboutWarehouses> list
-                = controller.getTableInformationAboutWarehouses();
-
-        table.setItems(list);
-
-        table.getColumns().addAll(numberCol, nameCol, telephoneNumberCol);
-
-        return table;
     }
 
     public static void main(String[] args) {
