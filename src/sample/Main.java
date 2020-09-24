@@ -21,11 +21,13 @@ public class Main extends Application {
 
         HBox mainHBox = new HBox();
         TableView table = new TableView();
+        Controller controller = new Controller();
+        table = controller.getTableDeliveryHistory();
         VBox mainVBox = new VBox(mainHBox, table);
 
 
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(mainVBox, 500, 500));
+        primaryStage.setScene(new Scene(mainVBox, 600, 500));
         primaryStage.show();
     }
 
