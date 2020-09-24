@@ -21,11 +21,14 @@ public class Controller {
 
     public ObservableList<CurrentSubscriptions> getCurrentSubscriptions() {
         CurrentSubscriptions object1 = new CurrentSubscriptions("Иван Васильевич",
-                "без професии", "Наука и жизнь", "полгода");
+                "без професии", "Наука и жизнь",
+                "13.02.20", "13.08.20");
         CurrentSubscriptions object2 = new CurrentSubscriptions("Александр Сергеевич",
-                "студент", "Красивые места СССР", "год");
+                "студент", "Красивые места СССР",
+                "13.03.20", "13.03.21");
         CurrentSubscriptions object3 = new CurrentSubscriptions("Семен Семенович",
-                "инженер", "Юный радиолюбитель", "полгода");
+                "инженер", "Юный радиолюбитель",
+                "13.07.20", "13.10.20");
 
         return FXCollections.observableArrayList(object1, object2, object3);
     }
@@ -77,17 +80,21 @@ public class Controller {
                 = new TableColumn<CurrentSubscriptions, String>("post");
         TableColumn nameOfPublicationCol
                 = new TableColumn<CurrentSubscriptions, String>("nameOfPublication");
-        TableColumn periodOfSubscriptionCol
-                = new TableColumn<CurrentSubscriptions, String>("periodOfSubscription");
+        TableColumn periodOfSubscriptionFromCol
+                = new TableColumn<CurrentSubscriptions, String>("periodOfSubscriptionFrom");
+        TableColumn periodOfSubscriptionToCol
+                = new TableColumn<CurrentSubscriptions, String>("periodOfSubscriptionTo");
 
         FIOCol.setCellValueFactory(new PropertyValueFactory<>("FIO"));
         postCol.setCellValueFactory(new PropertyValueFactory<>("post"));
         nameOfPublicationCol.setCellValueFactory(new PropertyValueFactory<>("nameOfPublication"));
-        periodOfSubscriptionCol.setCellValueFactory(new PropertyValueFactory<>("periodOfSubscription"));
+        periodOfSubscriptionFromCol.setCellValueFactory(new PropertyValueFactory<>("periodOfSubscriptionFrom"));
+        periodOfSubscriptionToCol.setCellValueFactory(new PropertyValueFactory<>("periodOfSubscriptionTo"));
 
         table.setItems(getCurrentSubscriptions());
 
-        table.getColumns().addAll(FIOCol, postCol, nameOfPublicationCol, periodOfSubscriptionCol);
+        table.getColumns().addAll(FIOCol, postCol, nameOfPublicationCol,
+                periodOfSubscriptionFromCol, periodOfSubscriptionToCol);
 
         return table;
     }

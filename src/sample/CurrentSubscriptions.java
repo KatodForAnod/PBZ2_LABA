@@ -4,13 +4,16 @@ public class CurrentSubscriptions {
     String FIO;
     String post;
     String nameOfPublication;
-    String periodOfSubscription;
+    String periodOfSubscriptionFrom;
+    String periodOfSubscriptionTo;
 
-    public CurrentSubscriptions(String FIO, String post, String nameOfPublication, String periodOfSubscription) {
+    public CurrentSubscriptions(String FIO, String post, String nameOfPublication,
+                                String periodOfSubscriptionFrom, String periodOfSubscriptionTo) {
         this.FIO = FIO;
         this.post = post;
         this.nameOfPublication = nameOfPublication;
-        this.periodOfSubscription = periodOfSubscription;
+        this.periodOfSubscriptionFrom = periodOfSubscriptionFrom;
+        this.periodOfSubscriptionTo = periodOfSubscriptionTo;
     }
 
     public String getFIO() {
@@ -37,11 +40,19 @@ public class CurrentSubscriptions {
         this.nameOfPublication = nameOfPublication;
     }
 
-    public String getPeriodOfSubscription() {
-        return periodOfSubscription;
+    public String getPeriodOfSubscriptionFrom() {
+        return periodOfSubscriptionFrom;
     }
 
-    public void setPeriodOfSubscription(String periodOfSubscription) {
-        this.periodOfSubscription = periodOfSubscription;
+    public void setPeriodOfSubscriptionFrom(String periodOfSubscriptionFrom) {
+        this.periodOfSubscriptionFrom = periodOfSubscriptionFrom;
+    }
+
+    public String getPeriodOfSubscriptionTo() {
+        return periodOfSubscriptionTo;
+    }
+
+    public void setPeriodOfSubscriptionTo(String periodOfSubscriptionTo) {
+        this.periodOfSubscriptionTo = periodOfSubscriptionTo;
     }
 }
