@@ -6,7 +6,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
 public class Controller {
+    Connection c;
+    Statement stmt;
 
     public ObservableList<AllPublication> getAllPublication() {
         AllPublication object1 = new AllPublication(1,
@@ -127,4 +133,40 @@ public class Controller {
 
         return table;
     }
+
+    public void addSubscriberToDataBase(String... textFields) {
+        try {
+            String FIO = textFields[0];
+            String post = textFields[1];
+            String nameOfPublication = textFields[2];
+            String periodOfSubscriptionFrom = textFields[3];
+            String periodOfSubscriptionTo = textFields[4];
+
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager
+                    .getConnection("jdbc:postgresql://localhost:5432/testbase", "postgres", "12345678");
+            c.setAutoCommit(false);
+            System.out.println("-- Opened database successfully");
+            String sql;
+
+            //--------------- INSERT ROWS ---------------
+            stmt = c.createStatement();
+            sql = "INSERT INTO CURRENT_SUBSCRIPTION (FIO, post, nameOfPublication," +
+                    "periodOfSubscriptionFrom, periodOfSubscriptionTo) " +
+                    "VALUES ();";
+            //TO DO использовать String format
+            //stmt.executeUpdate(sql);
+
+            stmt.close();
+            c.commit();
+            System.out.println("-- Records created successfully");
+            c.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    }
+
 }

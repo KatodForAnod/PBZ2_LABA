@@ -103,7 +103,6 @@ public class Main extends Application {
 
             btn.setOnAction(er -> {
                 //вызов метода добавления
-
             });
         });
 
