@@ -151,11 +151,12 @@ public class Controller {
 
             //--------------- INSERT ROWS ---------------
             stmt = c.createStatement();
-            sql = "INSERT INTO CURRENT_SUBSCRIPTION (FIO, post, nameOfPublication," +
-                    "periodOfSubscriptionFrom, periodOfSubscriptionTo) " +
-                    "VALUES ();";
-            //TO DO использовать String format
-            //stmt.executeUpdate(sql);
+            sql = String.format("INSERT INTO CURRENT_SUBSCRIPTION (FIO, post, nameOfPublication," +
+                            "periodOfSubscriptionFrom, periodOfSubscriptionTo) " +
+                            "VALUES ('%s', '%s', '%s'," +
+                            "'%s', '%s');",
+                    FIO, post, nameOfPublication, periodOfSubscriptionFrom, periodOfSubscriptionTo);
+            stmt.executeUpdate(sql);
 
             stmt.close();
             c.commit();
