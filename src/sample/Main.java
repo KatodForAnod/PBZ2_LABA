@@ -58,6 +58,7 @@ public class Main extends Application {
         });
         addSubscriber.setOnAction(e -> {
             Button btn = new Button("add");
+            Button findBtn = new Button("find");
 
             Label FIOLabel = new Label("FIO");
             Label postLabel = new Label("post");
@@ -81,7 +82,7 @@ public class Main extends Application {
             forLabel.setSpacing(8);
             forLabel.setPadding(new Insets(2));
 
-            HBox hBox = new HBox(forLabel, forField, btn);
+            HBox hBox = new HBox(forLabel, forField, btn, findBtn);
             hBox.setAlignment(Pos.CENTER);
 
             StackPane secondaryLayout = new StackPane();
@@ -107,6 +108,19 @@ public class Main extends Application {
                         nameOfPublicationField.getText(),
                         periodOfSubscriptionFromField.getText(),
                         periodOfSubscriptionToField.getText());
+            });
+            findBtn.setOnAction(er -> {
+                String[] dataFromDatabase =
+                        controller.findDataFromCurrentSubscription(FIOField.getText());
+                try {
+                    nameOfPublicationField.setText(dataFromDatabase[1]);
+                    postField.setText(dataFromDatabase[0]);
+                    periodOfSubscriptionFromField.setText(dataFromDatabase[2]);
+                    periodOfSubscriptionToField.setText(dataFromDatabase[3]);
+                } catch (ArrayIndexOutOfBoundsException eq) {
+                    eq.printStackTrace();
+                }
+
             });
         });
 

@@ -8,7 +8,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Controller {
     Connection c;
@@ -167,5 +172,36 @@ public class Controller {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
+    }
+
+    public String[] findDataFromCurrentSubscription(String FIO) {
+        String[] dataFromDatabase = new String[4];
+        System.out.print("fio=" + FIO);
+        try {
+
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager
+                    .getConnection("jdbc:postgresql://localhost:4444/2ndLab", "postgres", "12345678");
+            c.setAutoCommit(false);
+            System.out.println("-- Opened database successfully");
+
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM CURRENT_SUBSCRIPTIONS " +
+                    "WHERE fio = '" + FIO + "' ;");
+            while (rs.next()) {
+                dataFromDatabase[0] = rs.getString("post");
+                dataFromDatabase[1] = rs.getString("nameOfPublication");
+                dataFromDatabase[2] = rs.getString("periodOfSubscriptionFrom");
+                dataFromDatabase[3] = rs.getString("periodOfSubscriptionTo");
+            }
+            rs.close();
+            stmt.close();
+            c.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return dataFromDatabase;
     }
 }
