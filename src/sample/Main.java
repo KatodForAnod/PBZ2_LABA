@@ -59,6 +59,7 @@ public class Main extends Application {
         addSubscriber.setOnAction(e -> {
             Button btn = new Button("add");
             Button findBtn = new Button("find");
+            Button editBtn = new Button("edit");
 
             Label FIOLabel = new Label("FIO");
             Label postLabel = new Label("post");
@@ -82,13 +83,13 @@ public class Main extends Application {
             forLabel.setSpacing(8);
             forLabel.setPadding(new Insets(2));
 
-            HBox hBox = new HBox(forLabel, forField, btn, findBtn);
+            HBox hBox = new HBox(forLabel, forField, btn, findBtn, editBtn);
             hBox.setAlignment(Pos.CENTER);
 
             StackPane secondaryLayout = new StackPane();
             secondaryLayout.getChildren().add(hBox);
 
-            Scene secondScene = new Scene(secondaryLayout, 350, 200);
+            Scene secondScene = new Scene(secondaryLayout, 450, 200);
 
             Stage newWindow = new Stage();
             newWindow.setTitle("Second Stage");
@@ -121,6 +122,13 @@ public class Main extends Application {
                     eq.printStackTrace();
                 }
 
+            });
+            editBtn.setOnAction(er -> {
+                controller.editInformationToCurrentSubscription(FIOField.getText(),
+                        postField.getText(),
+                        nameOfPublicationField.getText(),
+                        periodOfSubscriptionFromField.getText(),
+                        periodOfSubscriptionToField.getText());
             });
         });
 

@@ -176,7 +176,7 @@ public class Controller {
 
     public String[] findDataFromCurrentSubscription(String FIO) {
         String[] dataFromDatabase = new String[4];
-        System.out.print("fio=" + FIO);
+
         try {
 
             Class.forName("org.postgresql.Driver");
@@ -203,5 +203,39 @@ public class Controller {
             System.exit(0);
         }
         return dataFromDatabase;
+    }
+
+    public void editInformationToCurrentSubscription(String... textFields) {
+        try {
+            String FIO = textFields[0];
+            String post = textFields[1];
+            String nameOfPublication = textFields[2];
+            String periodOfSubscriptionFrom = textFields[3];
+            String periodOfSubscriptionTo = textFields[4];
+
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager
+                    .getConnection("jdbc:postgresql://localhost:4444/2ndLab", "postgres", "12345678");
+            c.setAutoCommit(false);
+            System.out.println("-- Opened database successfully");
+            String sql;
+            //--------------- INSERT ROWS ---------------
+            stmt = c.createStatement();
+            sql = String.format("UPDATE CURRENT_SUBSCRIPTIONS set post = '%s', nameOfPublication= '%s'," +
+                            "periodOfSubscriptionFrom= '%s', periodOfSubscriptionTo= '%s' " +
+                            "WHERE FIO = '%s';",
+                    post, nameOfPublication, periodOfSubscriptionFrom, periodOfSubscriptionTo, FIO);
+            stmt.executeUpdate(sql);
+
+            stmt.close();
+            c.commit();
+            System.out.println("-- Records created successfully");
+            c.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
     }
 }
