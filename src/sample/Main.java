@@ -28,6 +28,7 @@ public class Main extends Application {
         Button switchToCurrentSubscriptions = new Button("CurrentSubscriptions");
         Button switchToDeliveryHistory = new Button("DeliveryHistory");
         Button addSubscriber = new Button("Add subscriber");
+        Button deleteBtn = new Button("delete");
 
         HBox mainHBox = new HBox(switchToTableAllPublication,
                 switchToCurrentSubscriptions, switchToDeliveryHistory, addSubscriber);
@@ -83,7 +84,7 @@ public class Main extends Application {
             forLabel.setSpacing(8);
             forLabel.setPadding(new Insets(2));
 
-            HBox hBox = new HBox(forLabel, forField, btn, findBtn, editBtn);
+            HBox hBox = new HBox(forLabel, forField, btn, findBtn, editBtn, deleteBtn);
             hBox.setAlignment(Pos.CENTER);
 
             StackPane secondaryLayout = new StackPane();
@@ -129,6 +130,9 @@ public class Main extends Application {
                         nameOfPublicationField.getText(),
                         periodOfSubscriptionFromField.getText(),
                         periodOfSubscriptionToField.getText());
+            });
+            deleteBtn.setOnAction(er -> {
+                controller.deleteInformationFromCurrentSubscription(FIOField.getText());
             });
         });
 

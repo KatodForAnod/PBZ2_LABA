@@ -238,4 +238,26 @@ public class Controller {
             System.exit(0);
         }
     }
+
+    public void deleteInformationFromCurrentSubscription(String FIO) {
+        try {
+
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager
+                    .getConnection("jdbc:postgresql://localhost:4444/2ndLab", "postgres", "12345678");
+            c.setAutoCommit(false);
+            System.out.println("-- Opened database successfully");
+
+            stmt = c.createStatement();
+            stmt.executeUpdate("DELETE FROM CURRENT_SUBSCRIPTIONS " +
+                    "WHERE fio = '" + FIO + "' ;");
+
+            stmt.close();
+            c.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    }
 }
