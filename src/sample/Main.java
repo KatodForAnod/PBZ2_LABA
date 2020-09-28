@@ -102,7 +102,11 @@ public class Main extends Application {
             newWindow.show();
 
             btn.setOnAction(er -> {
-                //вызов метода добавления
+                controller.addSubscriberToDataBase(FIOField.getText(),
+                        postField.getText(),
+                        nameOfPublicationField.getText(),
+                        periodOfSubscriptionFromField.getText(),
+                        periodOfSubscriptionToField.getText());
             });
         });
 

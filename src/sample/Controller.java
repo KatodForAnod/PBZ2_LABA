@@ -144,14 +144,13 @@ public class Controller {
 
             Class.forName("org.postgresql.Driver");
             c = DriverManager
-                    .getConnection("jdbc:postgresql://localhost:5432/testbase", "postgres", "12345678");
+                    .getConnection("jdbc:postgresql://localhost:4444/2ndLab", "postgres", "12345678");
             c.setAutoCommit(false);
             System.out.println("-- Opened database successfully");
             String sql;
-
             //--------------- INSERT ROWS ---------------
             stmt = c.createStatement();
-            sql = String.format("INSERT INTO CURRENT_SUBSCRIPTION (FIO, post, nameOfPublication," +
+            sql = String.format("INSERT INTO CURRENT_SUBSCRIPTIONS (FIO, post, nameOfPublication," +
                             "periodOfSubscriptionFrom, periodOfSubscriptionTo) " +
                             "VALUES ('%s', '%s', '%s'," +
                             "'%s', '%s');",
@@ -169,5 +168,4 @@ public class Controller {
             System.exit(0);
         }
     }
-
 }
