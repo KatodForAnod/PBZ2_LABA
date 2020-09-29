@@ -219,12 +219,10 @@ public class Main extends Application {
                         estimatedDeliveryDateField.getText(),
                         typeOfDeliveryField.getText());
             });
-            /*
-            deleteBtn.setOnAction(er -> {
-                controller.deleteInformationFromCurrentSubscription(FIOField.getText());
-            });
 
-             */
+            deleteBtn.setOnAction(er -> {
+                controller.deleteInformationFromDeliveryHistory(FIOField.getText());
+            });
         });
 
     }
