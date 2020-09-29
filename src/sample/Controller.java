@@ -260,4 +260,39 @@ public class Controller {
             System.exit(0);
         }
     }
+
+    public void addInformationToDeliveryHistory(boolean statusOfDelivery, String... textFields) {
+        try {
+
+            String FIO = textFields[0];
+            String nameOfPublication = textFields[1];
+            String estimatedDeliveryDate = textFields[2];
+            String typeOfDelivery = textFields[3];
+
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager
+                    .getConnection("jdbc:postgresql://localhost:4444/2ndLab", "postgres", "12345678");
+            c.setAutoCommit(false);
+            System.out.println("-- Opened database successfully");
+            String sql;
+            //--------------- INSERT ROWS ---------------
+            stmt = c.createStatement();
+            sql = String.format("INSERT INTO DELIVERY_HISTORY (FIO, nameOfPublication," +
+                            "estimatedDeliveryDate, typeOfDelivery, statusOfDelivery) " +
+                            "VALUES ('%s', '%s', '%s'," +
+                            "'%s', %b);",
+                    FIO, nameOfPublication, estimatedDeliveryDate, typeOfDelivery, statusOfDelivery);
+            stmt.executeUpdate(sql);
+
+            stmt.close();
+            c.commit();
+            System.out.println("-- Records created successfully");
+            c.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    }
 }
