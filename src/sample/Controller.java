@@ -295,4 +295,68 @@ public class Controller {
             System.exit(0);
         }
     }
+
+    public String[] findInformationFromDeliveryHistory(String FIO) {
+        String[] dataFromDatabase = new String[4];
+
+        try {
+
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager
+                    .getConnection("jdbc:postgresql://localhost:4444/2ndLab", "postgres", "12345678");
+            c.setAutoCommit(false);
+            System.out.println("-- Opened database successfully");
+
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM DELIVERY_HISTORY " +
+                    "WHERE fio = '" + FIO + "' ;");
+            while (rs.next()) {
+                dataFromDatabase[0] = rs.getString("nameOfPublication");
+                dataFromDatabase[1] = rs.getString("estimatedDeliveryDate");
+                dataFromDatabase[2] = rs.getString("typeOfDelivery");
+                dataFromDatabase[3] = rs.getString("statusOfDelivery");
+            }
+            rs.close();
+            stmt.close();
+            c.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return dataFromDatabase;
+    }
+
+    public void editInformationToDeliveryHistory(boolean statusOfDelivery, String... textFields) {
+        try {
+            String FIO = textFields[0];
+            String nameOfPublication = textFields[1];
+            String estimatedDeliveryDate = textFields[2];
+            String typeOfDelivery = textFields[3];
+
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager
+                    .getConnection("jdbc:postgresql://localhost:4444/2ndLab", "postgres", "12345678");
+            c.setAutoCommit(false);
+            System.out.println("-- Opened database successfully");
+            String sql;
+            //--------------- INSERT ROWS ---------------
+            stmt = c.createStatement();
+            sql = String.format("UPDATE DELIVERY_HISTORY set nameOfPublication= '%s'," +
+                            "estimatedDeliveryDate = '%s', typeOfDelivery= '%s', statusOfDelivery = %b " +
+                            "WHERE FIO = '%s';",
+                    nameOfPublication, estimatedDeliveryDate, typeOfDelivery, statusOfDelivery, FIO);
+            stmt.executeUpdate(sql);
+
+            stmt.close();
+            c.commit();
+            System.out.println("-- Records created successfully");
+            c.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    }
 }

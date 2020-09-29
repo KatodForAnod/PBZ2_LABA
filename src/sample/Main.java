@@ -194,27 +194,32 @@ public class Main extends Application {
                         estimatedDeliveryDateField.getText(),
                         typeOfDeliveryField.getText());
             });
-            /*
+
             findBtn.setOnAction(er -> {
                 String[] dataFromDatabase =
-                        controller.findDataFromCurrentSubscription(FIOField.getText());
+                        controller.findInformationFromDeliveryHistory(FIOField.getText());
                 try {
-                    nameOfPublicationField.setText(dataFromDatabase[1]);
-                    postField.setText(dataFromDatabase[0]);
-                    periodOfSubscriptionFromField.setText(dataFromDatabase[2]);
-                    periodOfSubscriptionToField.setText(dataFromDatabase[3]);
+                    nameOfPublicationField.setText(dataFromDatabase[0]);
+                    estimatedDeliveryDateField.setText(dataFromDatabase[1]);
+                    typeOfDeliveryField.setText(dataFromDatabase[2]);
+                    //да, выглядит еще ужаснее чем все остальное
+                    if (dataFromDatabase[3].equals("t")) {
+                        trueBtn.fire();
+                    } else {
+                        falseBtn.fire();
+                    }
                 } catch (ArrayIndexOutOfBoundsException eq) {
                     eq.printStackTrace();
                 }
+            });
 
-            });
             editBtn.setOnAction(er -> {
-                controller.editInformationToCurrentSubscription(FIOField.getText(),
-                        postField.getText(),
+                controller.editInformationToDeliveryHistory(trueBtn.isSelected(), FIOField.getText(),
                         nameOfPublicationField.getText(),
-                        periodOfSubscriptionFromField.getText(),
-                        periodOfSubscriptionToField.getText());
+                        estimatedDeliveryDateField.getText(),
+                        typeOfDeliveryField.getText());
             });
+            /*
             deleteBtn.setOnAction(er -> {
                 controller.deleteInformationFromCurrentSubscription(FIOField.getText());
             });
