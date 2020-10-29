@@ -20,71 +20,16 @@ public class CreateTable {
 
             //-------------- CREATE TABLE ---------------
             stmt = c.createStatement();
-            sql = "CREATE TABLE CURRENT_SUBSCRIPTIONS " +
-                    "(FIO                             TEXT PRIMARY KEY     NOT NULL," +
-                    " post                            TEXT  NOT NULL, " +
-                    " nameOfPublication               TEXT  NOT NULL, " +
-                    " periodOfSubscriptionFrom        TEXT  NOT NULL, " +
-                    " periodOfSubscriptionTo          TEXT  NOT NULL)";
+            sql = "CREATE TABLE DELIVERY_HISTORY " +
+                    "(FIO                     TEXT  NOT NULL," +
+                    " nameOfPublication       TEXT  NOT NULL, " +
+                    " estimatedDeliveryDate   TEXT  NOT NULL, " +
+                    " statusOfDelivery        BOOLEAN  NOT NULL, " +
+                    " typeOfDelivery          TEXT  NOT NULL)";
             stmt.executeUpdate(sql);
             stmt.close();
             c.commit();
             System.out.println("-- Table created successfully");
-            /*
-            //--------------- INSERT ROWS ---------------
-            stmt = c.createStatement();
-            sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) VALUES (1, 'Paul', 32, 'California', 20000.00 );";
-            stmt.executeUpdate(sql);
-
-            sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) VALUES (2, 'Allen', 25, 'Texas', 15000.00 );";
-            stmt.executeUpdate(sql);
-
-            sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) VALUES (3, 'Teddy', 23, 'Norway', 20000.00 );";
-            stmt.executeUpdate(sql);
-
-            sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) VALUES (4, 'Mark', 25, 'Rich-Mond ', 65000.00 );";
-            stmt.executeUpdate(sql);
-
-            stmt.close();
-            c.commit();
-            System.out.println("-- Records created successfully");
-
-
-            //-------------- UPDATE DATA ------------------
-            stmt = c.createStatement();
-            sql = "UPDATE COMPANY set SALARY = 25000.00 where ID=1;";
-            stmt.executeUpdate(sql);
-            c.commit();
-            stmt.close();
-
-            System.out.println("-- Operation UPDATE done successfully");
-
-
-            //--------------- SELECT DATA ------------------
-            stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM COMPANY;");
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                int age = rs.getInt("age");
-                String address = rs.getString("address");
-                float salary = rs.getFloat("salary");
-                System.out.println(String.format("ID=%s NAME=%s AGE=%s ADDRESS=%s SALARY=%s", id, name, age, address, salary));
-            }
-            rs.close();
-            stmt.close();
-            c.commit();
-            System.out.println("-- Operation SELECT done successfully");
-
-
-            //-------------- DELETE DATA ----------------------
-            stmt = c.createStatement();
-            sql = "DELETE from COMPANY where ID=2;";
-            stmt.executeUpdate(sql);
-            c.commit();
-            stmt.close();
-            System.out.println("-- Operation DELETE done successfully");
-        */
 
             c.close();
 
